@@ -1,0 +1,123 @@
+{
+  "ruleset": "basic",
+  "note": "公開知識可推導的通用檢查。受監管產業法遵的 pro 規則庫不在此倉庫，由 Peakstar 合作專案提供。",
+  "rules": [
+    {
+      "id": "AUTH_UNVERIFIED_REMOTE",
+      "category": "auth",
+      "severity": "critical",
+      "check": "remote_no_auth",
+      "title_zh": "未驗證的對外 MCP server",
+      "title_en": "Unauthenticated remote MCP server",
+      "why_zh": "這台 server 走遠端連線但沒有任何驗證標頭或金鑰，任何人都可能連上並驅動它。",
+      "why_en": "This server is remote but has no auth header or key, so anyone could connect and drive it.",
+      "risk_zh": "未授權存取、資料外洩、被當成跳板攻擊內部系統。",
+      "risk_en": "Unauthorized access, data leakage, pivot into internal systems.",
+      "ref": "2025 多起未驗證 MCP 端點曝險事件"
+    },
+    {
+      "id": "AUTH_BROAD_TOKEN",
+      "category": "auth",
+      "severity": "high",
+      "check": "broad_token",
+      "title_zh": "過寬權限的金鑰 / 環境變數",
+      "title_en": "Over-broad token / environment variable",
+      "why_zh": "偵測到 admin / root / 萬用權限樣式的金鑰，違反最小權限原則。",
+      "why_en": "Detected admin / root / wildcard-style credentials, violating least privilege.",
+      "risk_zh": "一旦金鑰外洩，攻擊者即取得過大權限。",
+      "risk_en": "If the key leaks, an attacker gains excessive privilege.",
+      "ref": "最小權限 (least privilege)"
+    },
+    {
+      "id": "INJ_TOOL_DESCRIPTION",
+      "category": "injection",
+      "severity": "high",
+      "check": "injection_tool_desc",
+      "title_zh": "工具描述含可疑指令樣式（疑似工具投毒）",
+      "title_en": "Tool description contains suspicious instruction patterns (possible tool poisoning)",
+      "why_zh": "工具描述中藏有「忽略前述指令」類字樣，可能在模型讀取時操弄其行為。",
+      "why_en": "The tool description hides phrases like \"ignore previous instructions\" that can manipulate the model when read.",
+      "risk_zh": "提示注入、權限提升、資料外送。",
+      "risk_en": "Prompt injection, privilege escalation, data exfiltration.",
+      "ref": "工具投毒 tool poisoning"
+    },
+    {
+      "id": "SUPPLY_KNOWN_CVE",
+      "category": "supply_chain",
+      "severity": "critical",
+      "check": "cve_package",
+      "title_zh": "使用命中已知 CVE 的套件版本",
+      "title_en": "Uses a package version matching a known CVE",
+      "why_zh": "server 啟動的套件版本對應內建 CVE 快照中的已知漏洞。",
+      "why_en": "The package version this server launches matches a known vulnerability in the built-in CVE snapshot.",
+      "risk_zh": "已知可被利用的漏洞，可能導致 RCE 或資料外洩。",
+      "risk_en": "A known, exploitable vulnerability that may lead to RCE or data leakage.",
+      "ref": "CVE 快照"
+    },
+    {
+      "id": "SUPPLY_UNPINNED",
+      "category": "supply_chain",
+      "severity": "medium",
+      "check": "unpinned_source",
+      "title_zh": "未鎖定版本的安裝來源",
+      "title_en": "Unpinned install source",
+      "why_zh": "以 @latest 或 curl | sh 方式安裝，無法保證取得的內容與供應鏈完整性。",
+      "why_en": "Installs via @latest or curl | sh, with no guarantee of content or supply-chain integrity.",
+      "risk_zh": "供應鏈投毒、惡意更新悄悄進入。",
+      "risk_en": "Supply-chain poisoning; malicious updates slip in silently.",
+      "ref": "供應鏈完整性"
+    },
+    {
+      "id": "ACTION_AUTO_APPROVE_DESTRUCTIVE",
+      "category": "action_risk",
+      "severity": "critical",
+      "check": "auto_approve_destructive",
+      "title_zh": "自動核可破壞性 / 對外動作",
+      "title_en": "Auto-approves destructive / outbound actions",
+      "why_zh": "設定自動核可了刪除 / 付款 / 外送類動作，且無 human-in-the-loop。",
+      "why_en": "Configured to auto-approve delete / payment / send actions with no human in the loop.",
+      "risk_zh": "一次幻覺或注入就可能造成不可逆損失。",
+      "risk_en": "A single hallucination or injection can cause irreversible damage.",
+      "ref": "human-in-the-loop"
+    },
+    {
+      "id": "ACTION_AUTO_APPROVE",
+      "category": "action_risk",
+      "severity": "high",
+      "check": "auto_approve_any",
+      "title_zh": "自動核可工具動作",
+      "title_en": "Auto-approves tool actions",
+      "why_zh": "設定自動核可了部分工具動作，繞過人工確認。",
+      "why_en": "Configured to auto-approve some tool actions, bypassing human confirmation.",
+      "risk_zh": "降低了對誤用與注入的最後一道防線。",
+      "risk_en": "Weakens the last line of defense against misuse and injection.",
+      "ref": "human-in-the-loop"
+    },
+    {
+      "id": "COST_NO_LIMIT",
+      "category": "cost_audit",
+      "severity": "medium",
+      "check": "no_rate_limit",
+      "title_zh": "缺速率 / 成本上限",
+      "title_en": "Missing rate / cost limit",
+      "why_zh": "未設定速率或成本上限，迴圈或濫用可能造成費用失控。",
+      "why_en": "No rate or cost limit set; loops or abuse can run up uncontrolled cost.",
+      "risk_zh": "成本失控、阻斷服務。",
+      "risk_en": "Runaway cost, denial of service.",
+      "ref": "成本治理"
+    },
+    {
+      "id": "AUDIT_NO_LOG",
+      "category": "cost_audit",
+      "severity": "low",
+      "check": "no_logging",
+      "title_zh": "缺稽核軌跡",
+      "title_en": "Missing audit trail",
+      "why_zh": "未設定日誌 / 稽核，事件發生後難以追溯。",
+      "why_en": "No logging / audit configured, making incidents hard to trace afterward.",
+      "risk_zh": "無法事後追溯、不利法遵與鑑識。",
+      "risk_en": "No post-incident traceability; bad for compliance and forensics.",
+      "ref": "稽核軌跡"
+    }
+  ]
+}

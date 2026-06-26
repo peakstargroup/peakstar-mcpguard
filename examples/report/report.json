@@ -1,0 +1,260 @@
+{
+  "tool": "mcpguard",
+  "version": "0.1.0",
+  "lang": "zh",
+  "title": "MCP / Agent 資安掃描報告",
+  "total_score": 17.2,
+  "light": "red",
+  "dimensions": [
+    {
+      "key": "auth",
+      "name": "驗證與存取",
+      "desc": "端點是否驗證、權限是否最小化",
+      "score": 0.0
+    },
+    {
+      "key": "injection",
+      "name": "提示注入 / 工具投毒抗性",
+      "desc": "工具描述 / skill 是否含可被操弄的指令樣式",
+      "score": 65.0
+    },
+    {
+      "key": "supply_chain",
+      "name": "供應鏈與來源",
+      "desc": "skill / server 來源、版本、是否命中已知 CVE",
+      "score": 0.0
+    },
+    {
+      "key": "action_risk",
+      "name": "動作風險 / 人為核可",
+      "desc": "破壞性 / 對外動作是否需人工核可",
+      "score": 0.0
+    },
+    {
+      "key": "cost_audit",
+      "name": "成本與稽核",
+      "desc": "有無速率 / 成本上限、有無稽核軌跡",
+      "score": 10.0
+    }
+  ],
+  "findings": [
+    {
+      "severity": "critical",
+      "text": "未驗證的對外 MCP server（public-gateway）：這台 server 走遠端連線但沒有任何驗證標頭或金鑰，任何人都可能連上並驅動它。 [2025 多起未驗證 MCP 端點曝險事件]"
+    },
+    {
+      "severity": "critical",
+      "text": "自動核可破壞性 / 對外動作（payments）：設定自動核可了刪除 / 付款 / 外送類動作，且無 human-in-the-loop。 [human-in-the-loop]"
+    },
+    {
+      "severity": "critical",
+      "text": "使用命中已知 CVE 的套件版本（legacy-remote）：server 啟動的套件版本對應內建 CVE 快照中的已知漏洞。 [CVE 快照]"
+    },
+    {
+      "severity": "high",
+      "text": "過寬權限的金鑰 / 環境變數（payments）：偵測到 admin / root / 萬用權限樣式的金鑰，違反最小權限原則。 [最小權限 (least privilege)]"
+    },
+    {
+      "severity": "high",
+      "text": "工具描述含可疑指令樣式（疑似工具投毒）（legacy-remote）：工具描述中藏有「忽略前述指令」類字樣，可能在模型讀取時操弄其行為。 [工具投毒 tool poisoning]"
+    },
+    {
+      "severity": "medium",
+      "text": "缺速率 / 成本上限（public-gateway）：未設定速率或成本上限，迴圈或濫用可能造成費用失控。 [成本治理]"
+    },
+    {
+      "severity": "medium",
+      "text": "未鎖定版本的安裝來源（payments）：以 @latest 或 curl | sh 方式安裝，無法保證取得的內容與供應鏈完整性。 [供應鏈完整性]"
+    },
+    {
+      "severity": "medium",
+      "text": "缺速率 / 成本上限（payments）：未設定速率或成本上限，迴圈或濫用可能造成費用失控。 [成本治理]"
+    },
+    {
+      "severity": "medium",
+      "text": "缺速率 / 成本上限（legacy-remote）：未設定速率或成本上限，迴圈或濫用可能造成費用失控。 [成本治理]"
+    },
+    {
+      "severity": "low",
+      "text": "缺稽核軌跡（public-gateway）：未設定日誌 / 稽核，事件發生後難以追溯。 [稽核軌跡]"
+    },
+    {
+      "severity": "low",
+      "text": "缺稽核軌跡（payments）：未設定日誌 / 稽核，事件發生後難以追溯。 [稽核軌跡]"
+    },
+    {
+      "severity": "low",
+      "text": "缺稽核軌跡（legacy-remote）：未設定日誌 / 稽核，事件發生後難以追溯。 [稽核軌跡]"
+    }
+  ],
+  "means": {
+    "stat": {
+      "value": "3",
+      "label": "偵測到的重大風險項（critical）"
+    },
+    "rows": [
+      {
+        "label": "高危項",
+        "value": "2"
+      },
+      {
+        "label": "中危項",
+        "value": "4"
+      }
+    ]
+  },
+  "meta": [
+    {
+      "label": "伺服器數",
+      "value": "3"
+    },
+    {
+      "label": "CVE 快照",
+      "value": "2026-06-01"
+    },
+    {
+      "label": "產生時間",
+      "value": "2026-06-26 18:40:57"
+    }
+  ],
+  "cta": {
+    "title": "下一步：安全地把 Agent 接上你的系統",
+    "body": "你的 Agent 資安為紅燈，偵測到重大破口。在受監管產業，這些破口可能造成法遵違規與資料外洩。安全地把 Agent 接上系統，需要最小權限、稽核軌跡與在地法遵架構，正是 Peakstar 的治理與整合服務。",
+    "button": "了解 Peakstar 的做法",
+    "url": "https://www.peakstargroup.com/?ref=mcpguard"
+  },
+  "consult_url": "https://www.peakstargroup.com/?ref=mcpguard",
+  "extra": {
+    "critical_count": 3,
+    "high_count": 2,
+    "medium_count": 4,
+    "low_count": 3,
+    "server_count": 3,
+    "cve_date": "2026-06-01",
+    "warnings": [],
+    "dimension_weights": {
+      "auth": 0.3,
+      "injection": 0.25,
+      "supply_chain": 0.2,
+      "action_risk": 0.15,
+      "cost_audit": 0.1
+    },
+    "findings": [
+      {
+        "id": "AUTH_UNVERIFIED_REMOTE",
+        "severity": "critical",
+        "category": "auth",
+        "server": "public-gateway",
+        "detail": {
+          "url": "https://gw.example.net/mcp"
+        },
+        "ref": "2025 多起未驗證 MCP 端點曝險事件"
+      },
+      {
+        "id": "ACTION_AUTO_APPROVE_DESTRUCTIVE",
+        "severity": "critical",
+        "category": "action_risk",
+        "server": "payments",
+        "detail": {
+          "action": "transfer_funds"
+        },
+        "ref": "human-in-the-loop"
+      },
+      {
+        "id": "SUPPLY_KNOWN_CVE",
+        "severity": "critical",
+        "category": "supply_chain",
+        "server": "legacy-remote",
+        "detail": {
+          "package": "@example/mcp-vulnerable-server",
+          "version": "1.0.0",
+          "cve": "CVE-2025-6514"
+        },
+        "ref": "CVE 快照"
+      },
+      {
+        "id": "AUTH_BROAD_TOKEN",
+        "severity": "high",
+        "category": "auth",
+        "server": "payments",
+        "detail": {
+          "env_key": "ADMIN_API_KEY"
+        },
+        "ref": "最小權限 (least privilege)"
+      },
+      {
+        "id": "INJ_TOOL_DESCRIPTION",
+        "severity": "high",
+        "category": "injection",
+        "server": "legacy-remote",
+        "detail": {
+          "tool": "search"
+        },
+        "ref": "工具投毒 tool poisoning"
+      },
+      {
+        "id": "COST_NO_LIMIT",
+        "severity": "medium",
+        "category": "cost_audit",
+        "server": "public-gateway",
+        "detail": {},
+        "ref": "成本治理"
+      },
+      {
+        "id": "SUPPLY_UNPINNED",
+        "severity": "medium",
+        "category": "supply_chain",
+        "server": "payments",
+        "detail": {
+          "reason": "@latest"
+        },
+        "ref": "供應鏈完整性"
+      },
+      {
+        "id": "COST_NO_LIMIT",
+        "severity": "medium",
+        "category": "cost_audit",
+        "server": "payments",
+        "detail": {},
+        "ref": "成本治理"
+      },
+      {
+        "id": "COST_NO_LIMIT",
+        "severity": "medium",
+        "category": "cost_audit",
+        "server": "legacy-remote",
+        "detail": {},
+        "ref": "成本治理"
+      },
+      {
+        "id": "AUDIT_NO_LOG",
+        "severity": "low",
+        "category": "cost_audit",
+        "server": "public-gateway",
+        "detail": {},
+        "ref": "稽核軌跡"
+      },
+      {
+        "id": "AUDIT_NO_LOG",
+        "severity": "low",
+        "category": "cost_audit",
+        "server": "payments",
+        "detail": {},
+        "ref": "稽核軌跡"
+      },
+      {
+        "id": "AUDIT_NO_LOG",
+        "severity": "low",
+        "category": "cost_audit",
+        "server": "legacy-remote",
+        "detail": {},
+        "ref": "稽核軌跡"
+      }
+    ],
+    "stats": {
+      "servers": 3,
+      "findings_total": 12,
+      "ruleset": "basic"
+    }
+  }
+}

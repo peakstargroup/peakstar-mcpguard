@@ -1,0 +1,12 @@
+{
+  "date": "2026-06-01",
+  "note": "內建公開 CVE 對照快照（小樣本，示意）。正式 feed 由 --update-cve 拉取 Peakstar 維護的公開來源（擴充點，骨架未啟用）。版本比對為精確字串比對。",
+  "packages": {
+    "@example/mcp-vulnerable-server": [
+      {"id": "CVE-2025-6514", "versions": ["1.0.0", "1.0.1", "1.1.0"], "cvss": 9.6}
+    ],
+    "mcp-remote": [
+      {"id": "CVE-2025-EXAMPLE", "versions": ["0.0.1"], "cvss": 8.1}
+    ]
+  }
+}

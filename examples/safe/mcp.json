@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "internal-docs": {
+      "url": "https://mcp.internal.example.com",
+      "headers": { "Authorization": "Bearer ${DOCS_TOKEN}" },
+      "rateLimit": { "maxRequests": 100 },
+      "logging": { "logFile": "/var/log/mcp/docs.log" }
+    },
+    "calculator": {
+      "command": "npx",
+      "args": ["-y", "@example/mcp-calculator@1.2.3"],
+      "rateLimit": { "maxRequests": 50 },
+      "logging": true
+    }
+  }
+}

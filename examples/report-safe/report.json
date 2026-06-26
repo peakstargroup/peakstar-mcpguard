@@ -1,0 +1,100 @@
+{
+  "tool": "mcpguard",
+  "version": "0.1.0",
+  "lang": "zh",
+  "title": "MCP / Agent 資安掃描報告",
+  "total_score": 100.0,
+  "light": "green",
+  "dimensions": [
+    {
+      "key": "auth",
+      "name": "驗證與存取",
+      "desc": "端點是否驗證、權限是否最小化",
+      "score": 100.0
+    },
+    {
+      "key": "injection",
+      "name": "提示注入 / 工具投毒抗性",
+      "desc": "工具描述 / skill 是否含可被操弄的指令樣式",
+      "score": 100.0
+    },
+    {
+      "key": "supply_chain",
+      "name": "供應鏈與來源",
+      "desc": "skill / server 來源、版本、是否命中已知 CVE",
+      "score": 100.0
+    },
+    {
+      "key": "action_risk",
+      "name": "動作風險 / 人為核可",
+      "desc": "破壞性 / 對外動作是否需人工核可",
+      "score": 100.0
+    },
+    {
+      "key": "cost_audit",
+      "name": "成本與稽核",
+      "desc": "有無速率 / 成本上限、有無稽核軌跡",
+      "score": 100.0
+    }
+  ],
+  "findings": [],
+  "means": {
+    "stat": {
+      "value": "0",
+      "label": "偵測到的重大風險項（critical）"
+    },
+    "rows": [
+      {
+        "label": "高危項",
+        "value": "0"
+      },
+      {
+        "label": "中危項",
+        "value": "0"
+      }
+    ]
+  },
+  "meta": [
+    {
+      "label": "伺服器數",
+      "value": "2"
+    },
+    {
+      "label": "CVE 快照",
+      "value": "2026-06-01"
+    },
+    {
+      "label": "產生時間",
+      "value": "2026-06-26 18:40:57"
+    }
+  ],
+  "cta": {
+    "title": "下一步：安全地把 Agent 接上你的系統",
+    "body": "你的 Agent 資安為綠燈，基礎良好。下一步是把治理制度化（最小權限、稽核、持續掃描），守住這個分數。",
+    "button": "了解 Peakstar 的做法",
+    "url": "https://www.peakstargroup.com/?ref=mcpguard"
+  },
+  "consult_url": "https://www.peakstargroup.com/?ref=mcpguard",
+  "extra": {
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 0,
+    "low_count": 0,
+    "server_count": 2,
+    "cve_date": "2026-06-01",
+    "warnings": [],
+    "dimension_weights": {
+      "auth": 0.3,
+      "injection": 0.25,
+      "supply_chain": 0.2,
+      "action_risk": 0.15,
+      "cost_audit": 0.1
+    },
+    "findings": [],
+    "stats": {
+      "servers": 2,
+      "findings_total": 0,
+      "ruleset": "basic"
+    }
+  }
+}

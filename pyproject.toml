@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peakstar-mcpguard"
+version = "0.1.0"
+description = "MCP / Agent security scanner: scan for security holes before your AI agent touches company systems. Zero dependencies, static, runs locally, sends nothing out."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Peakstar", email = "hello@peakstargroup.com" }]
+keywords = ["mcp", "ai-agent", "security", "llm-security", "prompt-injection", "supply-chain", "governance", "sme"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+    "Intended Audience :: Information Technology",
+]
+dependencies = []  # zero runtime dependencies, standard library only
+
+[project.urls]
+Homepage = "https://www.peakstargroup.com"
+Repository = "https://github.com/peakstargroup/peakstar-mcpguard"
+
+[project.scripts]
+mcpguard = "peakstar_mcpguard.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["peakstar_mcpguard*"]
+
+[tool.setuptools.package-data]
+peakstar_mcpguard = ["rulepacks/basic/*.json", "cve/*.json"]

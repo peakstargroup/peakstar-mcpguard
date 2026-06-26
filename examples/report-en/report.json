@@ -1,0 +1,260 @@
+{
+  "tool": "mcpguard",
+  "version": "0.1.0",
+  "lang": "en",
+  "title": "MCP / Agent Security Scan",
+  "total_score": 17.2,
+  "light": "red",
+  "dimensions": [
+    {
+      "key": "auth",
+      "name": "AuthN / AuthZ",
+      "desc": "Whether endpoints authenticate and permissions are least-privilege",
+      "score": 0.0
+    },
+    {
+      "key": "injection",
+      "name": "Prompt injection / tool poisoning",
+      "desc": "Whether tool descriptions / skills carry manipulable instruction patterns",
+      "score": 65.0
+    },
+    {
+      "key": "supply_chain",
+      "name": "Supply chain",
+      "desc": "Source and version of skills / servers, and known-CVE hits",
+      "score": 0.0
+    },
+    {
+      "key": "action_risk",
+      "name": "Action risk / human approval",
+      "desc": "Whether destructive / outbound actions require human approval",
+      "score": 0.0
+    },
+    {
+      "key": "cost_audit",
+      "name": "Cost & audit",
+      "desc": "Rate / cost limits and audit trail",
+      "score": 10.0
+    }
+  ],
+  "findings": [
+    {
+      "severity": "critical",
+      "text": "Unauthenticated remote MCP server (public-gateway): This server is remote but has no auth header or key, so anyone could connect and drive it. [2025 多起未驗證 MCP 端點曝險事件]"
+    },
+    {
+      "severity": "critical",
+      "text": "Auto-approves destructive / outbound actions (payments): Configured to auto-approve delete / payment / send actions with no human in the loop. [human-in-the-loop]"
+    },
+    {
+      "severity": "critical",
+      "text": "Uses a package version matching a known CVE (legacy-remote): The package version this server launches matches a known vulnerability in the built-in CVE snapshot. [CVE 快照]"
+    },
+    {
+      "severity": "high",
+      "text": "Over-broad token / environment variable (payments): Detected admin / root / wildcard-style credentials, violating least privilege. [最小權限 (least privilege)]"
+    },
+    {
+      "severity": "high",
+      "text": "Tool description contains suspicious instruction patterns (possible tool poisoning) (legacy-remote): The tool description hides phrases like \"ignore previous instructions\" that can manipulate the model when read. [工具投毒 tool poisoning]"
+    },
+    {
+      "severity": "medium",
+      "text": "Missing rate / cost limit (public-gateway): No rate or cost limit set; loops or abuse can run up uncontrolled cost. [成本治理]"
+    },
+    {
+      "severity": "medium",
+      "text": "Unpinned install source (payments): Installs via @latest or curl | sh, with no guarantee of content or supply-chain integrity. [供應鏈完整性]"
+    },
+    {
+      "severity": "medium",
+      "text": "Missing rate / cost limit (payments): No rate or cost limit set; loops or abuse can run up uncontrolled cost. [成本治理]"
+    },
+    {
+      "severity": "medium",
+      "text": "Missing rate / cost limit (legacy-remote): No rate or cost limit set; loops or abuse can run up uncontrolled cost. [成本治理]"
+    },
+    {
+      "severity": "low",
+      "text": "Missing audit trail (public-gateway): No logging / audit configured, making incidents hard to trace afterward. [稽核軌跡]"
+    },
+    {
+      "severity": "low",
+      "text": "Missing audit trail (payments): No logging / audit configured, making incidents hard to trace afterward. [稽核軌跡]"
+    },
+    {
+      "severity": "low",
+      "text": "Missing audit trail (legacy-remote): No logging / audit configured, making incidents hard to trace afterward. [稽核軌跡]"
+    }
+  ],
+  "means": {
+    "stat": {
+      "value": "3",
+      "label": "Critical findings detected"
+    },
+    "rows": [
+      {
+        "label": "High",
+        "value": "2"
+      },
+      {
+        "label": "Medium",
+        "value": "4"
+      }
+    ]
+  },
+  "meta": [
+    {
+      "label": "Servers",
+      "value": "3"
+    },
+    {
+      "label": "CVE snapshot",
+      "value": "2026-06-01"
+    },
+    {
+      "label": "Generated",
+      "value": "2026-06-26 18:40:57"
+    }
+  ],
+  "cta": {
+    "title": "Next step: connect your agent to your systems safely",
+    "body": "Your agent security is Red, with critical holes detected. In regulated industries these can mean compliance violations and data leaks. Connecting agents safely needs least-privilege, audit trails and local compliance architecture, which is Peakstar's governance and integration work.",
+    "button": "How Peakstar approaches this",
+    "url": "https://www.peakstargroup.com/?ref=mcpguard"
+  },
+  "consult_url": "https://www.peakstargroup.com/?ref=mcpguard",
+  "extra": {
+    "critical_count": 3,
+    "high_count": 2,
+    "medium_count": 4,
+    "low_count": 3,
+    "server_count": 3,
+    "cve_date": "2026-06-01",
+    "warnings": [],
+    "dimension_weights": {
+      "auth": 0.3,
+      "injection": 0.25,
+      "supply_chain": 0.2,
+      "action_risk": 0.15,
+      "cost_audit": 0.1
+    },
+    "findings": [
+      {
+        "id": "AUTH_UNVERIFIED_REMOTE",
+        "severity": "critical",
+        "category": "auth",
+        "server": "public-gateway",
+        "detail": {
+          "url": "https://gw.example.net/mcp"
+        },
+        "ref": "2025 多起未驗證 MCP 端點曝險事件"
+      },
+      {
+        "id": "ACTION_AUTO_APPROVE_DESTRUCTIVE",
+        "severity": "critical",
+        "category": "action_risk",
+        "server": "payments",
+        "detail": {
+          "action": "transfer_funds"
+        },
+        "ref": "human-in-the-loop"
+      },
+      {
+        "id": "SUPPLY_KNOWN_CVE",
+        "severity": "critical",
+        "category": "supply_chain",
+        "server": "legacy-remote",
+        "detail": {
+          "package": "@example/mcp-vulnerable-server",
+          "version": "1.0.0",
+          "cve": "CVE-2025-6514"
+        },
+        "ref": "CVE 快照"
+      },
+      {
+        "id": "AUTH_BROAD_TOKEN",
+        "severity": "high",
+        "category": "auth",
+        "server": "payments",
+        "detail": {
+          "env_key": "ADMIN_API_KEY"
+        },
+        "ref": "最小權限 (least privilege)"
+      },
+      {
+        "id": "INJ_TOOL_DESCRIPTION",
+        "severity": "high",
+        "category": "injection",
+        "server": "legacy-remote",
+        "detail": {
+          "tool": "search"
+        },
+        "ref": "工具投毒 tool poisoning"
+      },
+      {
+        "id": "COST_NO_LIMIT",
+        "severity": "medium",
+        "category": "cost_audit",
+        "server": "public-gateway",
+        "detail": {},
+        "ref": "成本治理"
+      },
+      {
+        "id": "SUPPLY_UNPINNED",
+        "severity": "medium",
+        "category": "supply_chain",
+        "server": "payments",
+        "detail": {
+          "reason": "@latest"
+        },
+        "ref": "供應鏈完整性"
+      },
+      {
+        "id": "COST_NO_LIMIT",
+        "severity": "medium",
+        "category": "cost_audit",
+        "server": "payments",
+        "detail": {},
+        "ref": "成本治理"
+      },
+      {
+        "id": "COST_NO_LIMIT",
+        "severity": "medium",
+        "category": "cost_audit",
+        "server": "legacy-remote",
+        "detail": {},
+        "ref": "成本治理"
+      },
+      {
+        "id": "AUDIT_NO_LOG",
+        "severity": "low",
+        "category": "cost_audit",
+        "server": "public-gateway",
+        "detail": {},
+        "ref": "稽核軌跡"
+      },
+      {
+        "id": "AUDIT_NO_LOG",
+        "severity": "low",
+        "category": "cost_audit",
+        "server": "payments",
+        "detail": {},
+        "ref": "稽核軌跡"
+      },
+      {
+        "id": "AUDIT_NO_LOG",
+        "severity": "low",
+        "category": "cost_audit",
+        "server": "legacy-remote",
+        "detail": {},
+        "ref": "稽核軌跡"
+      }
+    ],
+    "stats": {
+      "servers": 3,
+      "findings_total": 12,
+      "ruleset": "basic"
+    }
+  }
+}

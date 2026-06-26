@@ -1,0 +1,40 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MCP / Agent 資安掃描報告 - Peakstar</title><style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif;
+       color: #0D1F3C; background: #f4f6fa; line-height: 1.6; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+header { background: linear-gradient(135deg, #0D1F3C, #1E3A5F); color: #fff;
+         border-radius: 16px; padding: 28px 32px; }
+header h1 { margin: 0 0 4px; font-size: 26px; }
+header .sub { color: #b9c6dd; font-size: 14px; }
+header .meta { margin-top: 14px; font-size: 13px; color: #cdd8ea; }
+.gauge { text-align: center; margin: 28px 0; }
+.gauge .score { font-size: 72px; font-weight: 800; line-height: 1; }
+.gauge .max { font-size: 22px; color: #5b6b85; }
+.badge { display: inline-block; padding: 6px 16px; border-radius: 999px; color: #fff;
+         font-weight: 700; font-size: 15px; margin-top: 10px; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
+.card { background: #fff; border-radius: 12px; padding: 16px 18px;
+        border-left: 6px solid #ccc; box-shadow: 0 1px 3px rgba(13,31,60,.06); }
+.card h3 { margin: 0 0 4px; font-size: 16px; display: flex; justify-content: space-between; }
+.card .dimscore { font-weight: 800; }
+.card p { margin: 0; font-size: 13px; color: #5b6b85; }
+.card .bar { height: 7px; border-radius: 4px; background: #e6eaf2; margin-top: 10px; overflow: hidden; }
+.card .bar > i { display: block; height: 100%; }
+section h2 { font-size: 18px; border-bottom: 2px solid #3B5EA6; padding-bottom: 6px;
+             margin-top: 32px; }
+.finding { background: #fff; border-radius: 10px; padding: 12px 16px; margin: 10px 0;
+           border-left: 5px solid #999; }
+.finding .sev { font-size: 11px; font-weight: 700; color: #fff; padding: 2px 8px;
+                border-radius: 6px; margin-right: 8px; }
+.means { background: #fff7f0; border: 1px solid #f0d6bf; border-radius: 12px; padding: 18px 22px; }
+.means .big { font-size: 30px; font-weight: 800; color: #C0531B; }
+.cta { margin-top: 32px; background: #fff; border: 1px solid #d9e0ec;
+       border-left: 6px solid #3B5EA6; border-radius: 12px; padding: 22px 26px; }
+.cta h2 { color: #1E3A5F; border: 0; margin: 0 0 8px; font-size: 17px; }
+.cta p { color: #5b6b85; max-width: 640px; margin: 0 0 12px; }
+.cta a { color: #3B5EA6; text-decoration: none; font-weight: 700; }
+.cta .link { display: block; margin-top: 8px; font-size: 12px; color: #9aa6bd; word-break: break-all; }
+footer { margin-top: 28px; font-size: 12px; color: #7c8aa3; text-align: center; }
+@media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+</style></head><body><div class="wrap"><header><h1>MCP / Agent 資安掃描報告</h1><div class="sub">你的 AI Agent 接上公司系統前，先掃一次有沒有資安破口</div><div class="meta">伺服器數: 3 &nbsp;|&nbsp; CVE 快照: 2026-06-01 &nbsp;|&nbsp; 產生時間: 2026-06-26 18:40:57</div></header><div class="gauge"><div class="score" style="color:#C62828">17</div><div class="max">/ 100 &nbsp;Agent 資安總分</div><div class="badge" style="background:#C62828">紅燈</div></div><section><h2>五大資安維度</h2><div class="cards"><div class="card" style="border-left-color:#C62828"><h3><span>驗證與存取</span><span class="dimscore" style="color:#C62828">0</span></h3><p>端點是否驗證、權限是否最小化</p><div class="bar"><i style="width:2%;background:#C62828"></i></div></div><div class="card" style="border-left-color:#E07B39"><h3><span>提示注入 / 工具投毒抗性</span><span class="dimscore" style="color:#E07B39">65</span></h3><p>工具描述 / skill 是否含可被操弄的指令樣式</p><div class="bar"><i style="width:65%;background:#E07B39"></i></div></div><div class="card" style="border-left-color:#C62828"><h3><span>供應鏈與來源</span><span class="dimscore" style="color:#C62828">0</span></h3><p>skill / server 來源、版本、是否命中已知 CVE</p><div class="bar"><i style="width:2%;background:#C62828"></i></div></div><div class="card" style="border-left-color:#C62828"><h3><span>動作風險 / 人為核可</span><span class="dimscore" style="color:#C62828">0</span></h3><p>破壞性 / 對外動作是否需人工核可</p><div class="bar"><i style="width:2%;background:#C62828"></i></div></div><div class="card" style="border-left-color:#C62828"><h3><span>成本與稽核</span><span class="dimscore" style="color:#C62828">10</span></h3><p>有無速率 / 成本上限、有無稽核軌跡</p><div class="bar"><i style="width:10%;background:#C62828"></i></div></div></div></section><section><h2>高危發現</h2><div class="finding" style="border-left-color:#7B0000"><span class="sev" style="background:#7B0000">CRITICAL</span>未驗證的對外 MCP server（public-gateway）：這台 server 走遠端連線但沒有任何驗證標頭或金鑰，任何人都可能連上並驅動它。 [2025 多起未驗證 MCP 端點曝險事件]</div><div class="finding" style="border-left-color:#7B0000"><span class="sev" style="background:#7B0000">CRITICAL</span>自動核可破壞性 / 對外動作（payments）：設定自動核可了刪除 / 付款 / 外送類動作，且無 human-in-the-loop。 [human-in-the-loop]</div><div class="finding" style="border-left-color:#7B0000"><span class="sev" style="background:#7B0000">CRITICAL</span>使用命中已知 CVE 的套件版本（legacy-remote）：server 啟動的套件版本對應內建 CVE 快照中的已知漏洞。 [CVE 快照]</div><div class="finding" style="border-left-color:#C62828"><span class="sev" style="background:#C62828">HIGH</span>過寬權限的金鑰 / 環境變數（payments）：偵測到 admin / root / 萬用權限樣式的金鑰，違反最小權限原則。 [最小權限 (least privilege)]</div><div class="finding" style="border-left-color:#C62828"><span class="sev" style="background:#C62828">HIGH</span>工具描述含可疑指令樣式（疑似工具投毒）（legacy-remote）：工具描述中藏有「忽略前述指令」類字樣，可能在模型讀取時操弄其行為。 [工具投毒 tool poisoning]</div><div class="finding" style="border-left-color:#E07B39"><span class="sev" style="background:#E07B39">MEDIUM</span>缺速率 / 成本上限（public-gateway）：未設定速率或成本上限，迴圈或濫用可能造成費用失控。 [成本治理]</div><div class="finding" style="border-left-color:#E07B39"><span class="sev" style="background:#E07B39">MEDIUM</span>未鎖定版本的安裝來源（payments）：以 @latest 或 curl | sh 方式安裝，無法保證取得的內容與供應鏈完整性。 [供應鏈完整性]</div><div class="finding" style="border-left-color:#E07B39"><span class="sev" style="background:#E07B39">MEDIUM</span>缺速率 / 成本上限（payments）：未設定速率或成本上限，迴圈或濫用可能造成費用失控。 [成本治理]</div><div class="finding" style="border-left-color:#E07B39"><span class="sev" style="background:#E07B39">MEDIUM</span>缺速率 / 成本上限（legacy-remote）：未設定速率或成本上限，迴圈或濫用可能造成費用失控。 [成本治理]</div><div class="finding" style="border-left-color:#3B5EA6"><span class="sev" style="background:#3B5EA6">LOW</span>缺稽核軌跡（public-gateway）：未設定日誌 / 稽核，事件發生後難以追溯。 [稽核軌跡]</div><div class="finding" style="border-left-color:#3B5EA6"><span class="sev" style="background:#3B5EA6">LOW</span>缺稽核軌跡（payments）：未設定日誌 / 稽核，事件發生後難以追溯。 [稽核軌跡]</div><div class="finding" style="border-left-color:#3B5EA6"><span class="sev" style="background:#3B5EA6">LOW</span>缺稽核軌跡（legacy-remote）：未設定日誌 / 稽核，事件發生後難以追溯。 [稽核軌跡]</div></section><section><h2>這代表什麼</h2><div class="means"><div class="big">3</div><div>偵測到的重大風險項（critical）</div><div style="margin-top:10px">高危項: <b>2</b></div><div style="margin-top:10px">中危項: <b>4</b></div></div></section><div class="cta"><h2>下一步：安全地把 Agent 接上你的系統</h2><p>你的 Agent 資安為紅燈，偵測到重大破口。在受監管產業，這些破口可能造成法遵違規與資料外洩。安全地把 Agent 接上系統，需要最小權限、稽核軌跡與在地法遵架構，正是 Peakstar 的治理與整合服務。</p><a href="https://www.peakstargroup.com/?ref=mcpguard">了解 Peakstar 的做法</a><span class="link">https://www.peakstargroup.com/?ref=mcpguard</span></div><footer>本報告為靜態掃描的診斷輔助，非完整資安稽核，不構成安全保證，且不提供可直接利用的攻擊手法。所有分析皆於本機執行，未上傳任何設定。<br>Peakstar（品得網絡數位）：AI 顧問與工程交付，專注台灣與日本中小企業數位轉型。 &nbsp;|&nbsp; mcpguard v0.1.0</footer></div></body></html>
